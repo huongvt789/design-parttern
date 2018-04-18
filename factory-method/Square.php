@@ -7,6 +7,7 @@
  * Time: 10:45 AM
  */
 require_once 'Shape.php';
+
 class Square implements Shape1
 {
     public function draw()
