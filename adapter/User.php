@@ -6,123 +6,32 @@
  * Date: 4/18/18
  * Time: 4:24 PM
  */
-interface UserCustomer
-{
-    public function setName($name);
-
-    public function getName();
-}
-
-class UseDocter implements UserCustomer
-{
-    private $name;
-
-    public function setName($name)
+class SimpleUser{
+    private $title;
+    function __construct($title_new)
     {
-        // TODO: Implement setName() method.
-        $this->name = $name;
+        $this->title=$title_new;
     }
-
-    public function getName()
-    {
-        // TODO: Implement getName() method.
-        return $this->name;
+    function getTitle(){
+    return $this->title;
     }
 }
-
-interface Customer
-{
-    public function setfirstName($fName);
-
-    public function getfirstName();
-
-    public function setlastName($lName);
-
-    public function getlastName();
-}
-
-class Teacher implements Customer
-{
-
-    private $fName;
-    private $lName;
-
-    public function setfirstName($fName)
+//Class adapter goi t phuong thuc trong class simple.
+class ProUser{
+    private $majob;
+    function __construct(SimpleUser $user)
     {
-        // TODO: Implement setfirstName() method.
-        $this->fName = $fName;
+        $this->majob = $user;
     }
-
-    public function getfirstName()
-    {
-        // TODO: Implement getfirstName() method.
-        return $this->fName;
-    }
-
-    public function setlastName($lName)
-    {
-        // TODO: Implement setlastName() method.
-        $this->lName = $lName;
-    }
-
-    public function getlastName()
-    {
-        // TODO: Implement getlastName() method.
-        return $this->lName;
+    function getChangeLevel(){
+        return $this->majob->getTitle();
     }
 }
 
-//su dung Adapter to change.
-class UserToCustomer implements Customer
-{
+//Thuc thi test :
+$simple = new SimpleUser("Vui tinh va thong minh");
+$pro = new ProUser($simple);
+echo $pro->getChangeLevel();
 
-    protected $user;
-
-    protected $firstName;
-    protected $lastName;
-
-    public function __construct(UserCustomer $user)
-    {
-        $this->user = $user;
-        $fullname = $this->user->getName();
-
-        $pieces = explode("", $fullname);
-        $this->firstName = $pieces[0];
-        $this->lastName = $pieces[1];
-    }
-
-    public function setfirstName($fName)
-    {
-        // TODO: Implement setfirstName() method.
-        $this->firstName = $fName;
-
-    }
-
-    public function getfirstName()
-    {
-        // TODO: Implement getfirstName() method.
-        return $this->firstName;
-
-    }
-
-    public function setlastName($lName)
-    {
-        // TODO: Implement setlastName() method.
-        $this->lastName = $lName;
-
-    }
-
-    public function getlastName()
-    {
-        // TODO: Implement getlastName() method.
-        return $this->lastName;
-    }
-}
-
-$user = new UserToCustomer();
-$user->setName("Thanh Meo");
-$adapter = new UserToCustomer($user);
-//Sử dụng
-$firstName = $adapter->getFirstName();
-$lastName = $adapter->getLastName();
-echo "Customer's first name: {$firstName}, last name: {$lastName}";
+//Note: Nghia la hai lop khac nhau doi tuong khac nhau, k co su ke thua ma van co the sap nhap dc
+//Thong qua ham tao.
