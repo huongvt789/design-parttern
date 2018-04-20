@@ -74,7 +74,7 @@ class PatternSubject extends GameSubject
     }
 }
 
-$patternOb = new PatternObserver();
-$patternSu = new PatternSubject();
-$patternSu->attach($patternOb);
+$patternOb = new PatternObserver(); //Khoi tao vung nho cho Observer.
+$patternSu = new PatternSubject(); //Khoi tao vung nho cho Subj.
+$patternSu->attach($patternOb); //Goi toi ham attect cua Subject. Voi gia tri bien tro toi Ob.
 $patternSu->updateContentLike("Oki nhe");
